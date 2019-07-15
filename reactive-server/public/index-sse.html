@@ -1,0 +1,47 @@
+<html>
+<header>
+</header>
+<body>
+
+<h2>Stream of randomly created entities:</h2>
+
+<ol id="list">
+</ol>
+
+<script language="JavaScript">
+var eventSource = new EventSource("http://localhost:8080/random-entities");
+var lastTime = 0;
+
+eventSource.addEventListener('message', function (e) {
+    const entity = JSON.parse(e.data);
+    var deltaTime = 0;
+    
+    if (lastTime != 0) {
+        deltaTime = (new Date().getTime() - lastTime) / 1000;
+    }
+    
+    addStatus("ID: " + entity.id
+        + "; Desc: " + entity.description
+        + "; elapsed: " + deltaTime);
+        
+    lastTime = new Date().getTime();
+    
+}, false);
+
+
+setTimeout(function() {
+    addStatus("closing stream on client side");
+    eventSource.close();
+}, 10000);
+
+function addStatus(strContent) {
+    var newListElem = document.createElement("li");
+    document.getElementById("list").appendChild(newListElem);
+
+    newListElem.appendChild(
+        document.createTextNode(strContent));
+}
+
+</script>
+</body>
+</html>

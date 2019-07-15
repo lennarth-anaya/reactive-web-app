@@ -1,9 +1,13 @@
 HELP.md
 .gradle
-build/
+**/build/
+**/bin
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**
 !**/src/test/**
+
+### Testing resources
+mongo/
 
 ### STS ###
 .apt_generated

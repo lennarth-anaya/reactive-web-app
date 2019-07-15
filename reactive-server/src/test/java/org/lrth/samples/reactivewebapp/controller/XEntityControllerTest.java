@@ -9,7 +9,7 @@ import org.mockito.InjectMocks;
 import org.lrth.samples.reactivewebapp.entities.XEntity;
 import org.lrth.samples.reactivewebapp.data.XEntityRepository;
 import org.lrth.samples.reactivewebapp.controller.XEntityController;
-
+import org.springframework.test.context.ActiveProfiles;
 // import org.springframework.boot.test.context.SpringBootTest;
 // import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 // import org.springframework.boot.test.mock.mockito.MockBean;
@@ -19,7 +19,7 @@ import org.lrth.samples.reactivewebapp.controller.XEntityController;
 // import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
-import org.junit.runner.RunWith;
+//import org.junit.runner.RunWith;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -35,6 +35,7 @@ import org.reactivestreams.Publisher;
 // SpringBootApplication annotation prevent next exclusion to avoid spring boot context to try to really connect to Mongo's
 // so it cannot be used
 // @EnableAutoConfiguration(exclude={MongoAutoConfiguration.class, MongoDataAutoConfiguration.class})
+@ActiveProfiles("test")
 public class XEntityControllerTest {
   
   WebTestClient webTestClient;
@@ -83,7 +84,7 @@ public class XEntityControllerTest {
   public void create() {
     given(xEntityRepository.saveAll(any(Publisher.class)))
         .willReturn(Flux.just(
-          XEntity.builder().description("Cat").build()
+            XEntity.builder().description("Cat").build()
         ));
 
     Mono<XEntity> xEntity = Mono.just(XEntity.builder().description("NewCat").build());
