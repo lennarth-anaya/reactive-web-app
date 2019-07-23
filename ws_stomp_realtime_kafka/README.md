@@ -34,6 +34,12 @@ How to run:
 
 ### Java Applications
 
+Note: To debug any of these applications just add next parameters before java's cp flag:
+
+```
+-Xdebug -Xrunjdwp:transport=dt_socket,address=8000,server=y,suspend=y
+```
+
 3. Clone and build java project
     
    ```git clone https://github.com/ebi-wp/kafka-streams-api-websockets.git```
@@ -59,6 +65,12 @@ How to run:
 When you click "Connect" you should see:
 
 ![Live dashboard](docs/img/dashboard.png)
+
+8. To stop all applications just Ctrl+C on each terminal they are running in.
+
+9. To stop Kafka and Zookeeper just type:
+
+   ```sudo docker-compose stop```
 
 
 Recommended resources:
